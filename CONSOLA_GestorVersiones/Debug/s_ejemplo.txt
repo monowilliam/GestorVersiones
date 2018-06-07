@@ -1,0 +1,11 @@
+Version 1.2
+e 1 |from string import *
+e 2 |from math import *
+e 6 |	# Imprime un saludo #
+e 7 |	print "Hola Mundo!\n"
+i 3 |from string import *
+i 2 |import net
+i 6 |	# Imprime los numeros de 0 a 10 #
+i 7 |	i = 0
+i 8 |	for i in range(10):
+i 9 |		print i

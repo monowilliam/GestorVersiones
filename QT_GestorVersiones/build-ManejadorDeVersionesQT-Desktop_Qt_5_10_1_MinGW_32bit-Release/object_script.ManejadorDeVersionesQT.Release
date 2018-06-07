@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\controlador.o
+./release\controladormodificar.o
+./release\archivo.o
+./release\controladorcambiar.o
+./release\version.o
+./release\qrc_img.o
+./release\moc_controlador.o
+./release\moc_controladormodificar.o
+./release\moc_controladorcambiar.o
+);

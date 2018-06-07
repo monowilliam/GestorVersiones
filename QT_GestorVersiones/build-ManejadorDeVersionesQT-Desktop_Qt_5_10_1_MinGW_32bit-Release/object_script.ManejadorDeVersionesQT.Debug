@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\controlador.o
+./debug\controladormodificar.o
+./debug\archivo.o
+./debug\controladorcambiar.o
+./debug\version.o
+./debug\qrc_img.o
+./debug\moc_controlador.o
+./debug\moc_controladormodificar.o
+./debug\moc_controladorcambiar.o
+);
