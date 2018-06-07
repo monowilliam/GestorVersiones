@@ -6,14 +6,14 @@
  */
 #include "Controlador.h"
 
-Controlador::Controlador() {}
+Controlador::Controlador() {}			//Constructor
 
-Controlador::~Controlador() {}
+Controlador::~Controlador() {}			//Destructor
 
 
 string Controlador::obtenerString(){
 	string a;
-	cin>>a;
+	cin>>a;								//Funcion para no usar cin
 	return a;
 }
 
@@ -23,7 +23,7 @@ void Controlador::buscarArchivo(string elemento){
 	if(!a.elArchivoExiste(elemento)){
 		cout << endl <<"El archivo no existe, por favor crear el archivo en la carpeta raiz";
 		cout << endl;
-		system("pause");
+		system("pause");				//Busca si un archivo existe
 		menu();
 	}
 }
@@ -32,7 +32,7 @@ void Controlador::buscarArchivo(string elemento){
 void Controlador::crearArchivo(string nom){
 	ofstream archivo;
 	nom= "s_" + nom;
-	archivo.open(nom,ios::out);
+	archivo.open(nom,ios::out);				//Se crea el proyecto y se genera la version s_texto
 	archivo.close();
 	cout << endl;
 	system("pause");
@@ -41,13 +41,13 @@ void Controlador::crearArchivo(string nom){
 
 
 void Controlador::eliminarArchivo(string nom){
-	const char *nom1 = nom.c_str();
+	const char *nom1 = nom.c_str();			//Elimina un archivo
 	remove(nom1);
 }
 
 
 void Controlador::crearProyecto(string nom){
-	buscarArchivo(nom);
+	buscarArchivo(nom);					//Se crea el proyecto y se genera la version s_texto
 	crearArchivo(nom);
 }
 
@@ -71,7 +71,7 @@ void Controlador::menuObtener(string archivoControl, string archivoOriginal){
 		system("pause");
 		cout << endl;
 		limpiar;
-		menuObtener(archivoControl,archivoOriginal);
+		menuObtener(archivoControl,archivoOriginal);			//Gestiona el menu de obtener
 	}
 	else if(decision=="2"){
 		limpiar;
@@ -214,7 +214,7 @@ void Controlador::menu(){
 				nombreproy = obtenerString();
 				crearProyecto(nombreproy);
 			}
-			else if( pl == "2"){
+			else if( pl == "2"){			//Gestiona el menu principal
 				limpiar;
 				cout << "Por favor ingrese el nombre del archivo que desea OBTENER: 'ejemplo.txt' ";
 				nombreproy = obtenerString();

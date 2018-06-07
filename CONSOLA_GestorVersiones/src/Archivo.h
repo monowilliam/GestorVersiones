@@ -22,26 +22,26 @@ using namespace std;
 class Archivo {
 private:
 	vector<string> indiceOriginal;
-	vector<string> textoOriginal1;
+	vector<string> textoOriginal1;        //Vector necesarios para recorrer el archivo
 	vector<string> textoEditado;
 public:
 	vector<int> indiceEliminados;
 	vector<int> indiceInsertados;
-	vector<string> textoEliminados;
+	vector<string> textoEliminados;        //Vectores que contienen texto e indice de texto eliminado e insertado
 	vector<string> textoInsertados;
 	vector<string> textoOriginal;
-	Archivo();
-	virtual ~Archivo();
-	bool elArchivoExiste(string);
-	vector<string> split_iterator(const string& str);
-	void clonarVersion(string archivoControl,string clon);
-	vector<vector<string>> devuelveVersiones(string archivoControl);
-	void agregarArchivoControl(string archivoControl, string archivoOriginal,string version);
-	void imprimirArchivos(string archivo);
-	void modificar(string archivoControl);
-	string obtenerDelta(string version, string archivoControl);
-	void diferencia(string archivov1, string archivov2);
-	void formatoDiferencia(string cambios);
+	Archivo();        //Constructor
+	virtual ~Archivo();        //Destructor
+	bool elArchivoExiste(string);        //Verifica si un archivo existe
+	vector<string> split_iterator(const string& str);        //Divide un texto en varias palabras
+	void clonarVersion(string archivoControl,string clon);        //Clona una version para despues ser modificada
+	vector<vector<string>> devuelveVersiones(string archivoControl);        //Vector contenedor de las versiones SOLO EL NOMBRE DE ESTAS
+	void agregarArchivoControl(string archivoControl, string archivoOriginal,string version);        //Se adhiere al archivo de control las modificaciones de una version.
+	void imprimirArchivos(string archivo);        //Imprime un archivo LOL
+	void modificar(string archivoControl);        //Modifica el archivo de control
+	string obtenerDelta(string version, string archivoControl);        //Devuelve el delta del parametro que se ingresa
+	void diferencia(string archivov1, string archivov2);        //Crea un pequeño archivo de control que contiene las diferencias
+	void formatoDiferencia(string cambios);        //Imprime de una manera especifica las diferencias
 };
 
 #endif /* ARCHIVO_H_ */

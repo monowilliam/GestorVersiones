@@ -7,14 +7,14 @@
 
 #include "Archivo.h"
 
-Archivo::Archivo() {}
+Archivo::Archivo() {}        //Constructor
 
-Archivo::~Archivo() {}
+Archivo::~Archivo() {}        //Destructor
 
 
 bool Archivo::elArchivoExiste(string nom){
 	FILE * archivo;
-	if((archivo = fopen(nom.c_str(), "r"))){
+	if((archivo = fopen(nom.c_str(), "r"))){        //Verifica si un archivo existe
 		fclose(archivo);
 		return true;
 	}else
@@ -31,7 +31,7 @@ vector<string> Archivo::split_iterator(const string& str){
 		for( string::const_iterator it = itBegin; it!=itEnd; ++it )
 			numItems += *it==' ';
 	  resultado.reserve(numItems);
-	  for( string::const_iterator it = itBegin; it!=itEnd; ++it )
+	  for( string::const_iterator it = itBegin; it!=itEnd; ++it )        //Divide un texto en varias palabras
 	  {
 	    if( *it == ' ' )
 	    {
@@ -70,7 +70,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 
 	vector <string> Union = textoEditado;
 	vector <int> flag;
-	for(int i=0; i<textoOriginal1.size();i++){
+	for(int i=0; i<textoOriginal1.size();i++){        //Realiza la Union entre 2 textos
 		flag.push_back(0);
 	}
 	for(int i=0; i<Union.size();i++){
@@ -88,7 +88,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	vector<string> Interseccion;
 	for(int i=0; i<flag.size();i++){
 		if (flag[i]==1){
-			Interseccion.push_back(textoOriginal1[i]);
+			Interseccion.push_back(textoOriginal1[i]);        //Realiza la interseccion de 2 textos
 		}
 	}
 	vector<int> flag2;
@@ -98,7 +98,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	vector<string> Diferencia;
 	for(int i=0; i<textoOriginal1.size();i++){
 		for(int j=0; j<Interseccion.size();j++){
-			if(Interseccion[j]==textoOriginal1[i] && flag2[i]==0){
+			if(Interseccion[j]==textoOriginal1[i] && flag2[i]==0){        //Realiza la Diferencia entre 2 textos
 				flag2[i]=1;
 			}
 		}
@@ -108,12 +108,12 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	int pos=0;
 	for(int i=0; i<textoOriginal1.size()  && !encontro; i++){
 		for(int j=0; j<textoEditado.size() && !encontro; j++){
-			if(textoOriginal1[i]==textoEditado[j]){
+			if(textoOriginal1[i]==textoEditado[j]){    
 				encontro=true;
 				pos=i+1;
 				archivo3 << "e "<<pos<<" |"<< textoOriginal1.at(i)<<endl;
 			}
-		}
+		}														//Busca el token e y lo ingresa en el texto
 	}
 	vector <string> Union2 = textoOriginal1;
 	for(int i=0; i<flag2.size();i++){
@@ -125,7 +125,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	encontro=false;
 	pos=0;
 	for(int i=0; i<textoOriginal1.size()  && !encontro; i++){
-		for(int j=0; j<textoEditado.size() && !encontro; j++){
+		for(int j=0; j<textoEditado.size() && !encontro; j++){				//Busca el token i y lo ingresa en el texto
 			if(textoOriginal1[i]==textoEditado[j]){
 				encontro=true;
 				pos=i+1;
@@ -140,7 +140,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	}
 	for(int i=0; i<Union2.size();i++){
 		for(int j=0; j<textoEditado.size();j++){
-			if(Union2[i]==textoEditado[j] && flag4[j]==0){
+			if(Union2[i]==textoEditado[j] && flag4[j]==0){				//Realiza la Union entre 2 textos
 				flag4[j]=1;
 			}
 		}
@@ -151,7 +151,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 		}
 	}
 	vector<string> Interseccion2;
-	for(int i=0; i<flag4.size();i++){
+	for(int i=0; i<flag4.size();i++){					//Realiza la interseccion entre 2 textos		
 		if (flag4[i]==1){
 			Interseccion2.push_back(textoEditado[i]);
 		}
@@ -163,7 +163,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	vector<string> Diferencia2;
 	for(int i=0; i<textoEditado.size();i++){
 		for(int j=0; j<Interseccion2.size();j++){
-			if(Interseccion2[j]==textoEditado[i] && flag3[i]==0){
+			if(Interseccion2[j]==textoEditado[i] && flag3[i]==0){				//Realiza la Diferencia entre 2 textos
 				flag3[i]=1;
 			}
 		}
@@ -171,7 +171,7 @@ void Archivo::diferencia(string archivov1, string archivov2){
 	//stringstream ins;
 	for(int i=0; i<flag3.size();i++){
 		if (flag4[i]==0){
-			Diferencia2.push_back(textoEditado[i]);
+			Diferencia2.push_back(textoEditado[i]);								//Busca el token i y lo ingresa en el texto	
 			archivo3<<"i "<<i+1 << " |"<<textoEditado[i]<<endl;
 			//inse.push_back(ins.str());
 		}
@@ -195,7 +195,7 @@ void Archivo::clonarVersion(string archivoControl,string clon){
     archivoAleer.open (archivoControl.c_str());
     archivoAescribir.open(clon);
     while (!archivoAleer.eof()) {
-        archivoAleer.get(chs);
+        archivoAleer.get(chs);					//Clona una version para despues ser modificada
         if (!archivoAleer.eof()) {
             archivoAescribir<<chs;
         }
@@ -216,7 +216,7 @@ void Archivo::agregarArchivoControl(string archivoControl, string archivoOrigina
 	ifstream archivo;
 	ifstream archivo2;
 	ofstream archivo3;
-	archivo.open("editarAQUI.txt");
+	archivo.open("editarAQUI.txt");					//Se adhiere al archivo de control las modificaciones de una version
 	archivo2.open(archivoOriginal.c_str());
 	system("pause");
 	archivo3.open("temporal_Control.txt");
@@ -228,7 +228,7 @@ void Archivo::agregarArchivoControl(string archivoControl, string archivoOrigina
 		getline(archivo2,linea2);
 		textoOriginal1.push_back(linea2);
 	}
-	archivo3<< "Version " << version << endl;
+	archivo3<< "Version " << version << endl;		//Ingresa el titulo de la version
 
 	vector <string> Union = textoEditado;
 	vector <int> flag;
@@ -360,7 +360,7 @@ void Archivo::imprimirArchivos(string archivo){
 	char chs;
 	a.open(archivo);
 	while(!a.eof()){
-		a.get(chs);
+		a.get(chs);					//Imprime el archivo
 		if(!a.eof())
 			cout << chs;
 	}
@@ -380,7 +380,7 @@ void Archivo::modificar(string archivoControl){
     archivoAleer.open ("temporal_Control.txt");
     archivoAescribir.open(archivoControl.c_str(),ios::app);
     while (!archivoAleer.eof()) {
-        archivoAleer.get(chs);
+        archivoAleer.get(chs);						//Modifica el archivo de control
         if (!archivoAleer.eof()) {
             archivoAescribir<<chs;
         }
@@ -410,64 +410,64 @@ string Archivo::obtenerDelta(string version, string archivoControl){
 		string s(1, aux[i]);
 		versionDiv.push_back(s);
 	}
-	if(todasVersiones.empty() && version=="1.1"){
+	if(todasVersiones.empty() && version=="1.1"){			//Si no hay versiones modificaciones y la version ingresada es 1.1 
 		return "1.2";
 	}
 
 	if("ultima"==version){
-		if(todasVersiones.empty()){
+		if(todasVersiones.empty()){						//Si la version ingresada es ultima
 			return "1.2";
 		}
 		versionDiv=todasVersiones.back();
 		num= atoi(versionDiv.back().c_str());
 		num++;
 		finalaux =to_string(num);
-		versionDiv.back()=finalaux;
+		versionDiv.back()=finalaux;						//Se toma el ultimo + 1
 		for(int i=0;i<versionDiv.size();i++){
 			final=final+versionDiv[i];
 		}
 		return final;
 	}
 	if(versionDiv.size()==1 && todasVersiones.empty()){
-		if(atoi(versionDiv[0].c_str()) != 2){
+		if(atoi(versionDiv[0].c_str()) != 2){				//Si se ingresa un numero mayor que 2 y no existen modificaciones error
 			final= "?";
 			return final;
 		}
 		return "2.1";
 	}
-	if(todasVersiones.empty()){
+	if(todasVersiones.empty()){				//Si no existen versiones error
 		return "?";
 	}
 
 	if(versionDiv.size()==3 && atoi(versionDiv[0].c_str()) == atoi(todasVersiones[todasVersiones.size()-1][0].c_str())+1 ){
 		final= "?";
-		return final;
+		return final;					//Si se ingresa una version en la que la siguiente version no sea mayor a esa + 1
 	}
 	if(versionDiv.size()%2==0){
-		final= "?";
+		final= "?";				//Si se ingresa una version con cardinalidad par error
 		return final;
 	}
 	if(versionDiv.size()==1 && (versionDiv[0] > todasVersiones[todasVersiones.size()-1][0])){
 		if(atoi(versionDiv[0].c_str()) != atoi(todasVersiones[todasVersiones.size()-1][0].c_str())+1){
 			final= "?";
-			return final;
+			return final;			//Si se ingresa una version con cardinalidad 1 y esta es mayor a la version anterior error 
 		}
 	}
 	if(versionDiv.size()==3 && (versionDiv[2] > todasVersiones[todasVersiones.size()-1][2])){
 		if(atoi(versionDiv[2].c_str()) != atoi(todasVersiones[todasVersiones.size()-1][2].c_str())+1){
 			final= "?";
-			return final;
+			return final;				//Si se ingresa una version con cardinalidad 3 y esta no existe porque su segundo parametro es mayor al ya existente +2
 		}
 	}
 	for(int i=0; i<versionDiv.size();i++){
 		if(i%2==0){
-			if(atoi(versionDiv[i].c_str())==0){
+			if(atoi(versionDiv[i].c_str())==0){		//Si se ingresa una version con algun parametro letra error
 				final= "?";
 				return final;
 			}
 		}
 		if(i%2==1){
-			if(versionDiv[i]!="."){
+			if(versionDiv[i]!="."){			//Si se ingresa una version que no contiene puntos error
 				final= "?";
 				return final;
 			}
@@ -475,26 +475,26 @@ string Archivo::obtenerDelta(string version, string archivoControl){
 
 	}
 	if(versionDiv.size()>7){
-		final= "?";
+		final= "?";			//Si se ingresa una version con cardinalidad> 7 error
 		return final;
 	}
 	if(versionDiv.size()==1 && (versionDiv[0] > todasVersiones[todasVersiones.size()-1][0])){
 		if(atoi(versionDiv[0].c_str()) == atoi(todasVersiones[todasVersiones.size()-1][0].c_str())+1){
 			final = versionDiv[0]+".1";
-			return final;
+			return final;		//Retorna la siguiente version en 1
 		}
 	}
 	if(versionDiv.size()==3 && (versionDiv[2] == todasVersiones[todasVersiones.size()-1][2])){
 			num = atoi(todasVersiones[todasVersiones.size()-1][2].c_str())+1;
 			finalaux =to_string(num);
-			final = versionDiv[0]+"."+finalaux;
+			final = versionDiv[0]+"."+finalaux;			//Se crea la siguiente version + 1 
 			return final;
 	}
 	if(versionDiv.size()==3 && (versionDiv[2] < todasVersiones[todasVersiones.size()-1][2])){
 		for(int i=0;i<versionDiv.size();i++){
 			final=final+versionDiv[i];
 		}
-		final=final+".1.1";
+		final=final+".1.1";			//Se crea el primer delta
 		return final;
 	}
 	if(versionDiv.size()==7){
@@ -505,12 +505,12 @@ string Archivo::obtenerDelta(string version, string archivoControl){
 		versionDiv[6] = finalaux;
 		for(int i=0; i<todasVersiones.size();i++){
 			if(versionDiv==todasVersiones[i]){
-				final="?";
+				final="?";					//Si ya existe esa version error
 				return final;
 			}
 		}
 		for(int i=0;i<versionDiv.size();i++){
-			final=final+versionDiv[i];
+			final=final+versionDiv[i];		//Si no existe crearla
 		}
 		return final;
 
@@ -520,7 +520,7 @@ string Archivo::obtenerDelta(string version, string archivoControl){
 			if(todasVersiones[i].size()==7){
 				if((versionDiv[4]==todasVersiones[i][4]) && (versionDiv[2]==todasVersiones[i][2]) && (versionDiv[0]==todasVersiones[i][0])){
 					final="?";
-					return final;
+					return final;			//Si se ingresa una version con cardinalidad 5 y esta supera el actualmente existente
 				}
 			}
 		}
@@ -529,7 +529,7 @@ string Archivo::obtenerDelta(string version, string archivoControl){
 		num=num-1;
 		finalaux =to_string(num);
 		int flag =0;
-		for(int i=0; i<todasVersiones.size();i++){
+		for(int i=0; i<todasVersiones.size();i++){			//Crearla en caso contrario la .1
 			if(todasVersiones[i].size()==7){
 				if(finalaux==todasVersiones[i][4]){
 					flag=1;
@@ -552,11 +552,11 @@ string Archivo::obtenerDelta(string version, string archivoControl){
 		if(todasVersiones[i].size()==3){
 			if((versionDiv[2]==todasVersiones[i][2]) && (versionDiv[0]==todasVersiones[i][0])){
 				final="?";
-				return final;
+				return final;			//Si la version ya existe error
 			}
 		}
 	}
-	return "?";
+	return "?"; //Retornar error en cualquier otro caso
 }
 
 
@@ -578,7 +578,7 @@ vector<vector<string>> Archivo::devuelveVersiones(string archivoControl){
 		getline(archivo,linea);
 		contador++;
 			for(int i=0;i<split_iterator(linea).size();i++){
-    			if(split_iterator(linea)[i]=="Version"){
+    			if(split_iterator(linea)[i]=="Version"){			//Vector contenedor de las versiones SOLO EL NOMBRE DE ESTAS
     				versiones.push_back(split_iterator(linea)[i+1]);
 				}
 			}
@@ -636,7 +636,7 @@ void Archivo::formatoDiferencia(string cambios){
 		int n = sizeof(linea);
 		if(linea[0]=='e'){
 			for(w1=0; w1<n; w1++){
-				if(linea[w1]==separador){
+				if(linea[w1]==separador){			//Imprime de una manera especifica las diferencias
 					break;
 				}
 			}

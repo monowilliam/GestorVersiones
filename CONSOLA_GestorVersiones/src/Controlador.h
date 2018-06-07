@@ -29,15 +29,15 @@ class Controlador {
 public:
 	Archivo a;
 	Version v;
-	Controlador();
-	virtual ~Controlador();
-	string obtenerString();
-	void crearProyecto(string);
-	void crearArchivo(string);
-	void eliminarArchivo(string);
-	void buscarArchivo(string);
-	void menu();
-	void menuObtener(string archivoControl, string archivoOriginal);
+	Controlador();			//Constructor
+	virtual ~Controlador();			//Destructor
+	string obtenerString();			//Funcion para no usar cin
+	void crearProyecto(string);		//Se crea el proyecto y se genera la version s_texto
+	void crearArchivo(string);		//Crea un archivo con un nombre solicitado
+	void eliminarArchivo(string);	//Elimina un archivo
+	void buscarArchivo(string);		//Busca si un archivo existe
+	void menu();					//Gestiona el menu 
+	void menuObtener(string archivoControl, string archivoOriginal); 		//Gestiona el menu de obtener
 
 
 };

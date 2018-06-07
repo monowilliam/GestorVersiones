@@ -11,16 +11,16 @@
 
 class Version : public Archivo{
 public:
-    Version();
-    virtual ~Version();
-    void buscarVersion(string nomVersion, string archivoControl);
-    void generarVersion(string archivoControl, string archivoOriginal);
-    void imprimirVersiones(string archivoControl);
-    bool existeVersion(string archivoControl, string version);
-    vector<string> versionesAnterior(string version, string archivoControl);
-    void regenerarRecursivo(string archivoControl, string archivoOriginal,string version);
-    void regenerarRecursivo2(string archivoControl, string archivoOriginal,string version, string n);
-    void regenerarRecursivomeAnterior(string archivoControl, string archivoOriginal,string version);
+	Version();		//Constructor
+	virtual ~Version();		//Destructor
+	void buscarVersion(string nomVersion, string archivoControl);		//Busca si existe una version
+	void generarVersion(string archivoControl, string archivoOriginal);		//Genera una version
+	void imprimirVersiones(string archivoControl);			//Imprime las versiones actuales
+	bool existeVersion(string archivoControl, string version);		//Verifica si existe una version
+	vector<string> versionesAnterior(string version, string archivoControl);	//Almacena LOS NOMBRES DE LAS VERSIONES ANTERIORES
+	void regenerarRecursivo(string archivoControl, string archivoOriginal,string version);		//Genera las versiones con respecto a la ANTERIOR
+	void regenerarRecursivo2(string archivoControl, string archivoOriginal,string version, string n);	//Genera las versiones con respecto a la ANTERIOR
+	void regenerarRecursivomeAnterior(string archivoControl, string archivoOriginal,string version);	////Genera las versiones con respecto a la ANTERIOR
 };
 
 #endif /* VERSION_H_ */

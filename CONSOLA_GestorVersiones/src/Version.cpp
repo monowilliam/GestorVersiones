@@ -8,10 +8,10 @@
 #include "Version.h"
 
 
-Version::Version() {}
+Version::Version() {}		//Constructor
 
 
-Version::~Version() {}
+Version::~Version() {}		//Destructor
 
 
 void Version::buscarVersion(string nomVersion, string archivoControl){
@@ -31,7 +31,7 @@ void Version::buscarVersion(string nomVersion, string archivoControl){
 		contador++;
 		if(flag==1){
 			for (int i=0; i < (split_iterator(linea).size()); i++){
-				if(split_iterator(linea)[i]=="Version")
+				if(split_iterator(linea)[i]=="Version")		//Encuentra el token Version
 					flag=0;
 			}
 			int n = sizeof(linea);
@@ -42,7 +42,7 @@ void Version::buscarVersion(string nomVersion, string archivoControl){
 					}
 				}
 				string ind = linea.substr(0,w1);
-				string  tex= linea.substr(w1+1);
+				string  tex= linea.substr(w1+1);		//Almacena lo que existe despues del token e
 				char k=ind[2];
 				int x = (int)k - 48;
 				indiceEliminados.push_back(x);
@@ -55,7 +55,7 @@ void Version::buscarVersion(string nomVersion, string archivoControl){
 					}
 				}
 				string ind = linea.substr(0,w1);
-				string  tex= linea.substr(w1+1);
+				string  tex= linea.substr(w1+1);		//Almacena lo que existe despues del token e
 				char k=ind[2];
 				int x = (int)k - 48;
 				indiceInsertados.push_back(x);
@@ -146,7 +146,7 @@ void Version::imprimirVersiones(string archivoControl){
     }
     sort(versiones.begin(),versiones.end());
     for(int i=0;i<versiones.size();i++){
-                version<<"Version "<<versiones[i]<<endl;
+                version<<"Version "<<versiones[i]<<endl;			//Imprime las versiones actuales
     }if(versiones.empty())
         version << "No existen versiones, por favor modifique la version original "<<endl<<endl;
     archivo.close();
@@ -160,9 +160,6 @@ bool Version::existeVersion(string archivoControl, string version){
 	vector<vector<string>> todasVersiones = devuelveVersiones(archivoControl);
 	int flag=0;
 	vector<string> versionDiv;
-	if(version == "ultima" && todasVersiones.empty()){
-		flag=1;
-	}
 	if(version=="ultima"){
 		versionDiv=todasVersiones[todasVersiones.size()-1];
 	}
@@ -171,7 +168,7 @@ bool Version::existeVersion(string archivoControl, string version){
 		int n = str.length();
 	    char char_array[n+1];
 	    strcpy(char_array, str.c_str());
-		vector<char> aux;
+		vector<char> aux;			//Verifica si existe una version
 		for (int i=0; i<n; i++){
 	    	aux.push_back(char_array[i]);
 		}
@@ -223,7 +220,7 @@ vector<string> Version::versionesAnterior(string version, string archivoControl)
 					anteriores.push_back(todasVersiones[i]);
 				}
 			}
-		}
+		}						//Almacena LOS NOMBRES DE LAS VERSIONES ANTERIORES
 	}
 	for(int i=0; i<anteriores.size();i++){
 		string final;
@@ -246,7 +243,7 @@ void Version::regenerarRecursivo(string archivoControl, string archivoOriginal,s
 	vector<string> versionesAnteriores = versionesAnterior(version,archivoControl);
 	for (int i=0; i<versionesAnteriores.size(); i++){
 		if(i==0){
-			buscarVersion(versionesAnteriores[i],archivoControl);
+			buscarVersion(versionesAnteriores[i],archivoControl);		//Genera las versiones con respecto a la ANTERIOR
 			generarVersion(archivoControl,archivoOriginal);
 		}else{
 			buscarVersion(versionesAnteriores[i],archivoControl);
@@ -263,7 +260,7 @@ void Version::regenerarRecursivomeAnterior(string archivoControl, string archivo
 			buscarVersion(versionesAnteriores[i],archivoControl);
 			generarVersion(archivoControl,archivoOriginal);
 		}else{
-			buscarVersion(versionesAnteriores[i],archivoControl);
+			buscarVersion(versionesAnteriores[i],archivoControl);			//Genera las versiones con respecto a la ANTERIOR
 			generarVersion(archivoControl,"generado.txt");
 		}
 	}
@@ -278,7 +275,7 @@ void Version::regenerarRecursivo2(string archivoControl, string archivoOriginal,
 			buscarVersion(versionesAnteriores[i],archivoControl);
 			generarVersion(archivoControl,archivoOriginal);
 		}else{
-			buscarVersion(versionesAnteriores[i],archivoControl);
+			buscarVersion(versionesAnteriores[i],archivoControl);		//Genera las versiones con respecto a la ANTERIOR
 			generarVersion(archivoControl,"generado.txt");
 		}
 	}clonarVersion("generado.txt",n.c_str());
